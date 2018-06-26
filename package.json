@@ -1,0 +1,45 @@
+{
+  "name": "processtimeline",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --w --config webpack.config.js",
+    "pro": "cross-env NODE_ENV=production webpack-dev-server --progress --w --config webpack.config.js",
+    "build":"cross-env NODE_ENV=production webpack --w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mazhenxiao/ProcessTimeLine.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mazhenxiao/ProcessTimeLine/issues"
+  },
+  "homepage": "https://github.com/mazhenxiao/ProcessTimeLine#readme",
+  "dependencies": {
+    "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "cross-env": "^5.2.0",
+    "css-loader": "^0.28.11",
+    "mini-css-extract-plugin": "^0.4.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "webpack": "^4.12.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dashboard": "^2.0.0",
+    "webpack-dev-server": "^3.1.4"
+  }
+}
