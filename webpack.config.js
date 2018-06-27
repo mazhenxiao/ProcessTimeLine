@@ -13,7 +13,7 @@ let config={
     mode:process.env.NODE_ENV||"development",//process.env.NODE_ENV,production
     entry: {
         index: "./public/js/index.js",
-        vendor: ["babel-polyfill", 'react', 'react-dom','react-router-dom']
+        vendor: ["babel-polyfill", 'react', 'react-dom','react-router-dom','redux','react-redux','axios']
     },
     output: {
         path: path.join(__dirname,"/public/dist/js/"),
@@ -65,18 +65,22 @@ let config={
             ]
         })
       ],
+      devtool: "source-map", // enum
       resolve:{
-        extensions: [".js", ".sass"],
-        alias:{
-          "@js":path.resolve(__dirname,"/pubic/js"),
-          "@css":path.resolve(__dirname,"/pubic/css"),
-          "@view":path.resolve(__dirname,"/pubic/view"),
-          "@image":path.resolve(__dirname,"/pubic/image")
+        mainFiles: ["index"],
+        extensions: [".js", ".scss"],
+       //modules:[path.resolve(__dirname,"/public/")],
+       alias:{
+          "@js":path.join(__dirname,"/public/js/"),
+          "@css":path.join(__dirname,"/public/css/"),
+          "@view":path.join(__dirname,"/public/view/"),
+          "@image":path.join(__dirname,"/public/image/")
         }
-      }
+      },
      
       
 }
+
 Object.assign(config,devServer);
 
 if(process.env.NODE_ENV ==='production'){
