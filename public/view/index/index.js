@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import controllerIndex from "./controller-index";
 import actionIndex from "./action-index";
+import {connect} from "react-redux";
 import Demo from "@view/demo";
  const mapStateToProps=(state)=>{
     
@@ -12,7 +13,6 @@ const mapDispatchToProps=(dispatch)=>{
    }
 }
 @connect(mapStateToProps,mapDispatchToProps) 
-
 class VIewIndex extends Component{
     constructor(props, context){
         super(props, context);
@@ -33,11 +33,7 @@ class VIewIndex extends Component{
        
         return <article onClick={this.Event_Click_Getstate.bind(this)}>
                <Demo data={this.data}>
-                   <div>
-                       <p>
-                           <a>============</a>
-                       </p>
-                   </div>
+                   =============
                </Demo>
               {
                    storeIndex.data.list.map((da,ind)=>{
