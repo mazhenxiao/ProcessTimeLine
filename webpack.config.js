@@ -31,13 +31,22 @@ let config={
               ]
            },
            {
+            test: /\.(js|jsx)$/,
+            exclude:"/node_modules/",
+            loader: 'babel-loader' ,
+            query: {
+                presets: ['es2015','react','stage-1'],
+                plugins: ['transform-decorators-legacy','transform-decorators']
+            }
+           }
+           /* {
                test:/\.js$/,
                loader: "babel-loader",
                options: {
                   //  presets: ["es2015"]
                 presets: ['env', 'stage-0', 'react']
               }
-           }
+           } */
         ]
     },
     plugins: [

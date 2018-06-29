@@ -7,7 +7,7 @@ class Index extends Component{
 
     }
     componentDidMount(){
-        
+      
      }
     render(){
         return <section>
