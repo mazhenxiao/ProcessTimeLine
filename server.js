@@ -8,6 +8,7 @@ let readfile = (url)=>{
       })
   })
   }
+
 module.exports={
     devServer: {
         host: 'localhost', // can be overwritten by process.env.HOST
@@ -34,6 +35,11 @@ module.exports={
                // res.json({ custom: 'response' });
             })
             //===============
+            app.get("/getData",async (req,res)=>{
+                res.json({ data:[
+                    {nodeName:"node1",id:"1",startTime:"",endTime:""}
+                ] });
+            })
         }
       }
 }

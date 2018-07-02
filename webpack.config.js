@@ -83,7 +83,8 @@ let config={
           "@js":path.join(__dirname,"/public/js/"),
           "@css":path.join(__dirname,"/public/css/"),
           "@view":path.join(__dirname,"/public/view/"),
-          "@image":path.join(__dirname,"/public/image/")
+          "@image":path.join(__dirname,"/public/image/"),
+          "@service":path.join(__dirname,"/public/service/")
         }
       },
      
