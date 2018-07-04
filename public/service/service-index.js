@@ -5,8 +5,14 @@ import Axios from "./decorator-index";
         console.log("this=>",this);
        
     }
-    getData(){
-       
+    getData=({page=0,count=10}={})=>{
+        let url="/getData"
+      return this.$axios.get(url,{params:{page,count}})
+                   .then(this.success)
+                   .then(da=>{
+                       return da;
+                   })
+                   .catch(this.error)
     }
  }
 

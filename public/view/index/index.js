@@ -3,7 +3,7 @@ import controllerIndex from "./controller-index";
 import actionIndex from "./action-index";
 import {connect} from "react-redux";
 import {mixin} from "@js/tools";
-import Demo from "@view/demo";
+
  const mapStateToProps=(state)=>{
     
     return {storeIndex:state.storeIndex}
@@ -19,28 +19,41 @@ class VIewIndex extends Component{
     constructor(props, context){
         super(props, context);
         this.dispatch=null;
-        console.log("this=>===>",this);
-        for(var i in this){
-            console.log(i);
+        this.local={
+            list:[], //数据
+            timeLine:[], //时间线
         }
+       
     }
     componentDidMount(){
-        this.getData();
         this.props.onLoad(dispatch=>this.dispatch=dispatch);
+        this.init();//初始化
     }
     componentWillReceiveProps(next){
        
     }
+     init(){
+         this.C_setTimeline();//初始化生成线阵
+    }
     render(){
-        let {storeIndex,children} = this.props
-    
-        return <article onClick={this.Event_Click_Getstate.bind(this)}>
-               demo
+        let {storeIndex} = this.props
+        let {list=[],timeLine=[]}=storeIndex.data;
+        return <article>
+               <ol>
+                {
+                 timeLine.map((da,ind)=>{
+                     return <li key={ind}>da</li>
+                 })
+                }
+               </ol>
+               <ul>
               {
-                   storeIndex.data.list.map((da,ind)=>{
-                    return <p key={ind}>{da.startTime}</p>
+                   list.map((da,ind)=>{
+                    let{nodeName}=da;
+                    return <li key={ind}>{nodeName}</li>
                   })  
               }
+              </ul>
         </article>
     }
 }

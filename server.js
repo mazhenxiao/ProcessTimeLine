@@ -36,8 +36,23 @@ module.exports={
             })
             //===============
             app.get("/getData",async (req,res)=>{
+                let jc = 1530686477957;
+                let fn =()=>{ return parseInt(jc+1000*60*Math.random()*10)}
                 res.json({ data:[
-                    {nodeName:"node1",id:"1",startTime:"",endTime:""}
+                    {nodeName:"node1",id:"1",startTime:1530686477957,endTime:fn()},
+                    {nodeName:"node2",id:"2",startTime:fn(),endTime:fn()},
+                    {nodeName:"node3",id:"3",startTime:fn(),endTime:fn()},
+                    {nodeName:"node4",id:"4",startTime:fn(),endTime:fn()},
+                    {nodeName:"node5",id:"5",startTime:fn(),endTime:fn()},
+                    {nodeName:"node6",id:"6",startTime:fn(),endTime:fn()},
+                    {nodeName:"node7",id:"7",startTime:fn(),endTime:fn()},
+                    {nodeName:"node8",id:"8",startTime:fn(),endTime:fn()},
+                    {nodeName:"node9",id:"9",startTime:fn(),endTime:fn()},
+                    {nodeName:"node10",id:"10",startTime:fn(),endTime:fn()},
+                    {nodeName:"node11",id:"11",startTime:fn(),endTime:fn()},
+                    {nodeName:"node12",id:"12",startTime:fn(),endTime:fn()},
+                    {nodeName:"node13",id:"13",startTime:fn(),endTime:fn()},
+                    {nodeName:"node14",id:"14",startTime:fn(),endTime:fn()}
                 ] });
             })
         }
