@@ -10,8 +10,10 @@ export default {
        let data =await this.C_getData({page,count});
        let sortlist = new Set(data.map(arg=>arg.startTime).sort());
            this.local.timeline=sortlist;
-           
       
+     },
+     C_dispatch(){
+       
      }
 
    
