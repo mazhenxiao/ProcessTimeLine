@@ -13,7 +13,10 @@ export default {
       
      },
      C_dispatch(){
-       
+          this.C_dispatch({
+            type:"storyIndex",
+            data:{ ...this.local}
+          })
      }
 
    
