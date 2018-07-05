@@ -8,15 +8,16 @@ export default {
      },
   async C_setTimeline({page=0,count=10}={}){
        let data =await this.C_getData({page,count});
-       let sortlist = [...new Set(data.map(arg=>arg.startTime).sort())];
+       let sortlist = [...new Set(data.map(arg=>parseInt(arg.startTime)).concat(data.map(arg=>parseInt(arg.endTime))).sort())];
            this.local.timeLine=sortlist;
-           this.C_dispatch();
+          
+          this.C_dispatch();
      },
      C_dispatch(){
           let {list,timeLine}=this.local;
-          console.log(timeLine);
+          console.log(timeLine)
           this.dispatch({
-            type:"storyIndex",
+            type:"storeIndex",
             data:{ list,timeLine}
           })
      }

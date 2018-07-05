@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import controllerIndex from "./controller-index";
 import actionIndex from "./action-index";
 import {connect} from "react-redux";
-import {mixin} from "@js/tools";
-
+import {mixin,time} from "@js/tools";
+import ("@view/index/css/index.scss");
  const mapStateToProps=(state)=>{
     
     return {storeIndex:state.storeIndex}
@@ -38,11 +38,13 @@ class VIewIndex extends Component{
     render(){
         let {storeIndex} = this.props
         let {list=[],timeLine=[]}=storeIndex.data;
+        
         return <article>
                <ol>
                 {
                  timeLine.map((da,ind)=>{
-                     return <li key={ind}>da</li>
+                    
+                     return <li key={ind}>{new Date(da).format("hh:mm:ss") }</li>
                  })
                 }
                </ol>
@@ -50,7 +52,7 @@ class VIewIndex extends Component{
               {
                    list.map((da,ind)=>{
                     let{nodeName}=da;
-                    return <li key={ind}>{nodeName}</li>
+                    return <li key={ind}>{ nodeName}</li>
                   })  
               }
               </ul>
