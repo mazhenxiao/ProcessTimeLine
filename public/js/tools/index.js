@@ -1,4 +1,5 @@
 export let mixin=(...arg)=>{
+ 
    return (target,name,descriptor)=>{
      Object.assign(target.prototype,...arg);
    }
@@ -13,7 +14,7 @@ export let time=(num,str="yyyy-MM-dd hh:mm:ss")=>{
                  .replace(/ss/ig,d.getSeconds())
 }
 export let number=(taget,name,descriptor)=>{
-  debugger
+  
 }
 
 Date.prototype.format=function(str="yyyy-MM-dd hh:mm:ss"){
@@ -27,3 +28,9 @@ Date.prototype.format=function(str="yyyy-MM-dd hh:mm:ss"){
             .replace(/mm/,mm<10? '0'+mm:mm)
             .replace(/ss/,ss<10? '0'+ss:ss)
 }
+Object.defineProperty(Object.prototype,"length",{
+  get(){
+    let th = this;
+        return Object.keys(this).length
+  }
+})
