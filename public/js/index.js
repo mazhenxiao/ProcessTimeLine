@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import reactDom from 'react-dom';
 import Prouter from "@js/router";
+import("@css/index.scss");
 class Index extends Component{
     state={
 
