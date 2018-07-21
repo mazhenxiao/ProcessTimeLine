@@ -6,6 +6,7 @@ let opt = {
     ele:null,  //移动父元素
     x1:0,y1:0, //点击title内坐标为止
     left:0 ,   //父元素距左侧为止
+    index:null
 }
 export default{
   
@@ -26,8 +27,8 @@ export default{
             let {x,y}=tar.getBoundingClientRect();
             let {layerX,layerY}=event;
             let li=tar.parentNode;
-            let startx = li.getAttribute("index")*this.local.blockLi.width;
-            
+            opt.index = li.getAttribute("index")
+            let startx = opt.index*this.local.blockLi.width;
             Object.assign(opt,{startx,x,y,start:true,ele:li,x1:layerX,y1:layerY,left});
             document.body.classList.add("noselect");
         }
@@ -39,7 +40,8 @@ export default{
         if(!start){return}
         opt.x = pageX-x1-left;
         Object.assign(ele.style,{left:opt.x+"px",zIndex:100})
-        console.log(opt.x);
+        this.Private_Dommove();
+        //console.log(opt.x);
     },
     Private_Mouseup(event,th){
         opt.start=false;
@@ -57,15 +59,28 @@ export default{
         window.removeEventListener("mousemove",th.Private_Mousemove,false);
         window.removeEventListener("mouseup",th.Private_Mouseup,false);
     },
-    Private_checkPostion(){
+    Private_checkPostion(){ 
        
         let {wrapWidth,width} = this.local.blockLi;
-         let {startx,x,ele} = opt;
+        let {startx,x,ele} = opt;
        
          if(Math.abs(startx-x)<width){
            return startx
-         } 
+         }else{
+
+         }
           
+    },
+    Private_Dommove(){
+        let {x,ele} = opt;
+        let {width} = this.local.blockLi;
+        let index = Math.ceil((x+width/2)/width);
+        let {storeIndex} = this.props
+        let {list}=storeIndex.data;
+    
+        if(index!=parseInt(opt.index)+1){
+            console.log(list);
+        }
     }
 
 }

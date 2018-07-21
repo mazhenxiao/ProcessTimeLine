@@ -7,10 +7,12 @@ $axios = axios.create({
         }
 })
  success=(da)=>{
+     
      let {data}=da;
     return data;
 }
  error=(e)=>{
+     
   return Promise.reject(e)
 }
 export default Axios=(target,name,discriptor)=>{

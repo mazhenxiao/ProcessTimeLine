@@ -1,6 +1,7 @@
 @import "@css/pub.scss";
 $border1:#ccc solid 1px;
 $border2:1px rgb(255, 94, 1) solid;
+$border3:10px rgb(255, 94, 1) solid;
 .timeLine{ 
     @include relative();
     padding:10px;
@@ -39,12 +40,15 @@ $border2:1px rgb(255, 94, 1) solid;
                 span{ 
                     @include absolute();
                    // background:rgb(255, 94, 1);display:block;
-                   border-top:$border2;border-bottom:$border2;
-                    width:5px;
-                    &::before{ @extend .pesudo; 
-                      border-left:$border2;
+                  // border-top:$border2;border-bottom:$border2;
+                    width:10px;
+                    /* &::before{ @extend .pesudo; 
+                      border-left:$border3;
                       height:100%;
                       display: inline-block;text-align: center
+                    } */
+                    i{
+                        position: absolute;top:0px;left:0;font-style: none;font-size:12px;
                     }
                 }
             }
