@@ -1,5 +1,4 @@
 import * as service from "@service/service-index.js";
-import { cons } from "fp-ts/lib/Array";
 export default {
   //我在dev上的注释上的注释
   async C_getData(data){
@@ -16,7 +15,13 @@ export default {
        // console.log(sortlist);
         this.local.timeLine=sortlist;
            this.C_filterList(data);//过滤数据
+           this.C_filterNode(data);//过滤数据
            this.C_dispatch();  //发布
+     },
+     C_filterNode(da){
+       let data =  da.map(arg=>arg.id);
+       this.local.tools.souceId=["全部",...new Set(data)];
+       
      },
      C_filterList(da){
        let list = {};
@@ -29,10 +34,10 @@ export default {
           // console.log(list);
      },
      C_dispatch(){
-          let {timeLine,list}=this.local;
+          let {timeLine,list,tools}=this.local;
           this.dispatch({
             type:"storeIndex",
-            data:{ list,timeLine}
+            data:{ list,timeLine,showId:tools.showId}
           })
      }
 
