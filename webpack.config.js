@@ -63,7 +63,7 @@ let config={
             'process.env': {
                 NODE_ENV: isDev ? '"development"' : '"production"'
             },
-            "env":process.env.NODE_ENV=="iis" ? '"iss"' : '"development"'
+            "current":process.env.NODE_ENV=="none" ? '"none"' : '"development"'
         }),
         new webpack.optimize.SplitChunksPlugin({
             chunk:"all",

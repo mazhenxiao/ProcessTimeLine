@@ -92,7 +92,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "280ba6dcee3cf1b520d0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e0057666dc48e6d7aa7d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -10731,7 +10731,8 @@ var serviceIndex = (0, _decoratorIndex2.default)(_class = function serviceIndex(
         _ref$count = _ref.count,
         count = _ref$count === undefined ? 10 : _ref$count;
 
-    var url =  false ? undefined : "/getData";
+    console.log("production");
+    var url =  true ? "http://192.168.1.115:5000/FFLv2?getTrackList" : undefined;
     //let url = "http://192.168.1.115:5000/FFLv2?getTrackList";
     //this.$axios.get(url,{params:{page,count}})
     return _this.$axios.get(url).then(_this.success).then(function (da) {
