@@ -6,8 +6,9 @@ import Axios from "./decorator-index";
        
     }
     getData=({page=0,count=10}={})=>{
-        //let url="/getData"
-        let url = "http://192.168.1.115:5000/FFLv2?getTrackList";
+         
+        let url=env=="development"? "/getData":"http://192.168.1.115:5000/FFLv2?getTrackList";
+        //let url = "http://192.168.1.115:5000/FFLv2?getTrackList";
         //this.$axios.get(url,{params:{page,count}})
       return this.$axios.get(url)
                    .then(this.success)

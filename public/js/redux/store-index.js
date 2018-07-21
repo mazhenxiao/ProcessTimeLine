@@ -3,7 +3,9 @@ let db = {
  "type":"storeIndex",
  "data":{
      "list":[],
-     "show":true
+     "show":true,
+     "timeLine":[],
+     "showId":-1
  }
 }
 export let storeIndex=(state=db,action)=>{

@@ -22,14 +22,20 @@ class VIewIndex extends Component{
         this.dispatch=null;
         this.local={
             list:{}, //数据
+            tools:{
+                souceId:[],
+                showId:-1,
+                current:0,
+                color:[]
+            },
             timeLine:[], //时间线
             timeLineLi:{
-                width:120,
+                width:200,
                 height:40
             },
             blockLi:{
                 warpWidth:0,//总宽
-                width:120,//单元格宽
+                width:200,//单元格宽
             }
         }
        
@@ -63,9 +69,11 @@ class VIewIndex extends Component{
         
        let dom=[],num=0,h=40,l=10;
        let {width} = this.local.blockLi;
-       
+       let color = this.setColor();
+       let {showId}=this.props.storeIndex.data;
+       //console.log(showId);
            for(let li in da){
-               let {r,g,b} = this.setColor();
+               
               //da[li][symbol]=li.toString;
               dom.push(<li key={num} index={num} style={{width:width+"px",left:num*width+"px"}}>
                   <h6 className="title">{li}</h6>
@@ -76,7 +84,7 @@ class VIewIndex extends Component{
                        //  console.log((end-start));
                          return <span 
                                     key={ind} className="line" 
-                                    style={{top:start+"px",backgroundColor:`rgb(${r},${g},${b})`,color:`rgb(${255-r},${255-g},${255-b})`,height:Math.abs(end-start)+"px",left:(ind*10)+5+"px"}}
+                                    style={{opacity:`${showId<0? 1:arg.id==showId? 1:0.1}`,top:start+"px",backgroundColor:`${color[num]}`,height:Math.abs(end-start)+"px",left:(ind*2)+"px"}}
                                 ><i className="nodeId">{arg.id}</i></span>
                      })
                   }
@@ -88,11 +96,23 @@ class VIewIndex extends Component{
         return dom
     }
     setColor=()=>{
-        let r = Math.floor(Math.random()*255),
-            g = Math.floor(Math.random()*255),
-            b = Math.floor(Math.random()*255);
-            return {r,g,b}
-        //return `rgb(${)},${},${})`
+        if(this.local.tools.color.length){ return this.local.tools.color}
+        let color = [
+                     "#ABF000","#8DB42D","#6F9C00","#C2F83E","#D0F86F",
+                     "#00A876","#207E62","#006D4C","#35D4A4","#5FD4B1",
+                     "#FFD600","#BFA830","#A68B00","#FFE040","#FFE873",
+                     "#C50080","#94256D","#800053","#E238A7","#E266B7"
+                    ]
+      
+       
+        for(let i = 0 ; i<color.length;i++){
+            let num = Math.floor(Math.random()*color.length);
+            let current =color[i];
+            color[i]=color[num];
+            color[num]=current;
+        }
+        this.local.tools.color=color;
+        return color;
     }
     render(){
         let {storeIndex} = this.props
@@ -100,25 +120,40 @@ class VIewIndex extends Component{
         let {height:h,width:w}=this.local.timeLineLi;
         let {width}=this.local.blockLi;
         this.local.blockLi.warpWidth = list.length*this.local.timeLineLi.width;
-        return <article className="timeLine">
-               <ol className="timeLineBox" style={{top:h+"px",left:"10px",height:timeLine.length*h+"px",width:width+"px"}}>
-                {
-                 timeLine.map((da,ind)=>{
+        return  <section>
+                   <div className="timeTools">
+                        <label>选择重点显示ID：</label>
+                        <select onChange={this.A_ToolsChange.bind(this)}>
+                            {
+                                this.local.tools.souceId.map((da,ind)=>{
+                                    return <option key={ind} value={da=="全部"? -1:da }>{da}</option>
+                                })
+                            }
+                        </select>
+                        <p>
+                            <label>选择工具：</label>
+                            <label>卡尺 <input type="checkbox"  /></label>
+                        </p>
+                        
+                   </div>
+                    <article className="timeLine">
+                    <ol className="timeLineBox" style={{top:h+"px",left:"10px",height:timeLine.length*h+"px",width:"80px"}}>
+                        {
+                        timeLine.map((da,ind)=>{
+                            
+                            return <li style={{top:h*ind+"px",height:h+"px"}} key={ind}>{ da  }</li>
+                        })
+                        }
+                    </ol>
+                    <ul className="timeLineBlock" style={{left:80+20+"px",top:"10px",height:timeLine.length*h+"px",width:this.local.blockLi.warpWidth+"px"}}>
+                            {
+                                this.createTimeLineLi(list)
+                            
+                            }
+                    </ul>
                     
-                     return <li style={{top:h*ind+"px",height:h+"px"}} key={ind}>{ da  }</li>
-                 })
-                }
-               </ol>
-               <ul className="timeLineBlock" style={{left:w+20+"px",top:"10px",height:timeLine.length*h+"px",width:this.local.blockLi.warpWidth+"px"}}>
-              {
-                  this.createTimeLineLi(list)
-                  /*  list.map((da,ind)=>{
-                    let{nodeName}=da;
-                    return <li style={{left:w2*ind+"px",width:w2+"px"}} key={ind}>{ nodeName}</li>
-                  }) */  
-              }
-              </ul>
-        </article>
+                </article>
+        </section>
     }
 }
 

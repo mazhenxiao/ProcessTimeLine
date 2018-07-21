@@ -62,7 +62,8 @@ let config={
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: isDev ? '"development"' : '"production"'
-            }
+            },
+            "env":isDev ? '"development"' : '"production"'
         }),
         new webpack.optimize.SplitChunksPlugin({
             chunk:"all",

@@ -81,7 +81,17 @@ export default{
         if(index!=parseInt(opt.index)+1){
             console.log(list);
         }
+    },
+    A_ToolsChange(ev){
+        let el =ev.target;
+        let value = el.value;
+        let {timeLine,list}=this.local;
+        this.dispatch({
+            type:"storeIndex",
+            data:{ showId:value,timeLine,list}
+        })
     }
+
 
 }
  
