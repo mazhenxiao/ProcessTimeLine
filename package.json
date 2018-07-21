@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --progress --w --config webpack.config.js",
     "pro": "cross-env NODE_ENV=production webpack-dev-server --progress --w --config webpack.config.js",
-    "build": "cross-env NODE_ENV=production webpack --progress --w"
+    "build": "cross-env NODE_ENV=production webpack --progress --w",
+    "iis": "cross-env NODE_ENV=development webpack --progress --w"
   },
   "repository": {
     "type": "git",
