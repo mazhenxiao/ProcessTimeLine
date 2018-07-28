@@ -1,6 +1,6 @@
 import React,{Component,Children} from "react";
 import {Provider} from "react-redux";
-import { BrowserRouter as Router,Route} from 'react-router-dom';
+import { HashRouter as Router,Route} from 'react-router-dom';
 import RouterIndex from "@js/router/routerIndex";
 import store from "@js/redux";
 class Prouter extends Component{

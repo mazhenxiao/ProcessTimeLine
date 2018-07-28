@@ -18,8 +18,20 @@ import Axios from "./decorator-index";
                    })
                    .catch(this.error)
     }
+    getTestTW=()=>{
+          let url = "http://192.168.1.154:5000/FFLv2?getLogList";
+          return this.$axios.get(url)
+                    .then(this.success)
+                     .then(da=>{
+                        return da;
+                       
+                     })
+                     .catch(e=>{
+                         console.log(e)
+                     })
+    }
  }
 
-export let{ getData }=new serviceIndex()
+export let{ getData,getTestTW }=new serviceIndex()
 
 

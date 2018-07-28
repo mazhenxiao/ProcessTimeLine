@@ -71,12 +71,12 @@ let config={
             maxInitialRequests: 3,
             minSize: 30000,
             minChunks:2,
-            minimizer: [
-              new UglifyJsPlugin({ cache:true,sourceMap:true })
-            ]
+            // minimizer: [
+            //   new UglifyJsPlugin({ cache:true,sourceMap:true })
+            // ]
         })
       ],
-      devtool: "source-map", // enum
+     // devtool: "source-map", // enum
       resolve:{
         mainFiles: ["index"],
         extensions: [".js", ".scss"],
@@ -100,11 +100,11 @@ if(process.env.NODE_ENV ==='production'){
   config.plugins.concat([
     new UglifyJsPlugin({
       cache:true,
-      sourceMap:true, 
+      sourceMap:false, 
       parallel:true,
       extractComments:{
         banner:"${filename}.js=>mazhenxiao开发",
-        sourceMap:true
+        sourceMap:false
       }
     })
 ]);

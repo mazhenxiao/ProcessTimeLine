@@ -3,7 +3,7 @@ import controllerIndex from "./controller-index";
 import actionIndex from "./action-index";
 import {connect} from "react-redux";
 import {mixin,time} from "@js/tools";
-import { SSL_OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG } from "constants";
+
 import ("@view/index/css/index.scss");
  const mapStateToProps=(state)=>{
     
@@ -43,6 +43,7 @@ class VIewIndex extends Component{
     componentDidMount(){
         this.props.onLoad(dispatch=>this.dispatch=dispatch);
         this.init();//初始化
+      
        
     }
     componentWillReceiveProps(next){

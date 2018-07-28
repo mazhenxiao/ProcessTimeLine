@@ -1,4 +1,5 @@
 import * as service from "@service/service-index.js";
+let number=0;
 export default {
   //我在dev上的注释上的注释
   async C_getData(data){
@@ -40,6 +41,7 @@ export default {
             data:{ list,timeLine,showId:tools.showId}
           })
      }
+   
 
    
    
