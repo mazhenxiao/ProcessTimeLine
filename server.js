@@ -517,6 +517,19 @@ module.exports={
                     }
                 );
             })
+
+            //===table
+            app.get("/getTableData",async(reg,res)=>{
+                res.send(`logUploader:2: prepareHandleMessage 00574F70
+                logUploader:1: prepareHandleMessage 00574F70
+                PipelineMessage::~PipelineMessage(2) 0057D5A0
+                logInput:1: prepareHandleMessage 00574160
+                logUploader:2: prepareHandleMessage 00574F70
+                test =1
+                logInput:1: prepareHandleMessage 00574160
+                logUploader:2: prepareHandleMessage 00574F70
+                logInput:1: prepareHandleMessage 00574160`)
+            })
         }
       }
 }

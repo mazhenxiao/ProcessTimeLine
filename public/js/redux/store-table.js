@@ -3,6 +3,7 @@ let db = {
     "type":"storeTable",
     "data":{
         "list":[],
+        "text":""
     }
    }
    export let storeTable=(state=db,action)=>{
