@@ -6,6 +6,12 @@
   text-indent: 0;
   box-sizing: border-box; }
 
+html, body, .h100 {
+  height: 100%; }
+
+.h100 > section {
+  height: 100%; }
+
 .noselect {
   -moz-user-select: none;
   -o-user-select: none;

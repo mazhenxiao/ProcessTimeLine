@@ -2,11 +2,19 @@
   content: "";
   display: block; }
 
+.timeTools {
+  padding: 10px 100px; }
+  .timeTools p {
+    display: inline-block; }
+    .timeTools p .label {
+      margin-left: 100px; }
+
 .timeLine {
   position: relative;
   left: 0px;
   top: 0px;
-  padding: 10px; }
+  padding: 10px;
+  overflow: auto; }
   .timeLine .timeLineBox {
     position: absolute;
     left: 0px;
@@ -46,17 +54,23 @@
         font-size: 14px;
         font-weight: normal;
         height: 20px;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        opacity: 1;
         color: #fff;
         border: #ccc solid 1px;
         border-left: none;
-        background: rgba(202, 161, 149, 0.555); }
+        background: rgba(202, 161, 149, 0.555);
+        z-index: 200; }
       .timeLine .timeLineBlock li:first-child h6 {
         border-left: #ccc solid 1px; }
       .timeLine .timeLineBlock li div.content {
         position: relative;
         left: 0px;
         top: 0px;
-        top: 20px; }
+        top: 20px;
+        z-index: 100; }
         .timeLine .timeLineBlock li div.content span {
           position: absolute;
           left: 0px;
@@ -75,4 +89,11 @@
             font-size: 12px; }
       .timeLine .timeLineBlock li:nth-child(even) {
         background: #f7f0f0; }
+      .timeLine .timeLineBlock li .line {
+        position: absolute;
+        width: 100%;
+        height: 0;
+        border-top: #ccc dotted 1px; }
+    .timeLine .timeLineBlock.hideBox h6 {
+      opacity: 0; }
 

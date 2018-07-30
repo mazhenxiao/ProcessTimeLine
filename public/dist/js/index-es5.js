@@ -92,7 +92,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b4baee5dd93f3f56574a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "76d329f13b2237ded783"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -10294,8 +10294,8 @@ var RouterIndex = function (_Component) {
         key: "render",
         value: function render() {
             return _react2.default.createElement(
-                "div",
-                null,
+                "article",
+                { className: "h100 routerBox" },
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/index", component: _index2.default }),
                 _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: "/table", component: _table2.default })
             );
@@ -10389,7 +10389,10 @@ var VIewIndex = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
 
             var color = _this.setColor();
             var showId = _this.props.storeIndex.data.showId;
-            //console.log(showId);
+            var top = _this.state.timeLineBlock.top;
+            var storeIndex = _this.props.storeIndex;
+            var _storeIndex$data$time = storeIndex.data.timeLine,
+                timeLine = _storeIndex$data$time === undefined ? [] : _storeIndex$data$time;
 
             for (var li in da) {
 
@@ -10399,7 +10402,7 @@ var VIewIndex = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
                     { key: num, index: num, style: { width: width + "px", left: num * width + "px" } },
                     _react2.default.createElement(
                         "h6",
-                        { className: "title" },
+                        { className: "title", style: { top: top + "px" } },
                         li
                     ),
                     _react2.default.createElement(
@@ -10416,7 +10419,7 @@ var VIewIndex = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
                                 "span",
                                 {
                                     key: ind, className: "line",
-                                    style: { opacity: "" + (showId < 0 ? 1 : arg.id == showId ? 1 : 0.1), top: start + "px", backgroundColor: "" + color[num], height: Math.abs(end - start) + "px", left: ind * 2 + "px" }
+                                    style: { opacity: "" + (showId < 0 ? 1 : arg.id == showId ? 1 : 0.1), top: start + 20 + "px", backgroundColor: "" + color[num], height: Math.abs(end - start) + "px", left: ind * 2 + "px" }
                                 },
                                 _react2.default.createElement(
                                     "i",
@@ -10425,7 +10428,10 @@ var VIewIndex = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
                                 )
                             );
                         })
-                    )
+                    ),
+                    timeLine.map(function (da, ind) {
+                        return _react2.default.createElement("b", { className: "line", style: { top: h * ind + "px", left: "0px" }, key: ind });
+                    })
                 ));
                 num += 1;
             }
@@ -10468,6 +10474,11 @@ var VIewIndex = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
                 width: 200 //单元格宽
             }
         };
+        _this.state = {
+            timeLineBlock: {
+                top: 0
+            }
+        };
 
         return _this;
     }
@@ -10504,42 +10515,48 @@ var VIewIndex = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
             var _storeIndex$data = storeIndex.data,
                 _storeIndex$data$list = _storeIndex$data.list,
                 list = _storeIndex$data$list === undefined ? {} : _storeIndex$data$list,
-                _storeIndex$data$time = _storeIndex$data.timeLine,
-                timeLine = _storeIndex$data$time === undefined ? [] : _storeIndex$data$time;
+                _storeIndex$data$time2 = _storeIndex$data.timeLine,
+                timeLine = _storeIndex$data$time2 === undefined ? [] : _storeIndex$data$time2;
             var _local$timeLineLi = this.local.timeLineLi,
                 h = _local$timeLineLi.height,
                 w = _local$timeLineLi.width;
             var width = this.local.blockLi.width;
 
             this.local.blockLi.warpWidth = list.length * this.local.timeLineLi.width;
+            var _height = timeLine.length * h;
+            var screenHeight = window.innerHeight - (this.refs.timeTools ? this.refs.timeTools.offsetHeight : 80);
             return _react2.default.createElement(
                 "section",
-                null,
+                { className: "h100" },
                 _react2.default.createElement(
                     "div",
-                    { className: "timeTools" },
-                    _react2.default.createElement(
-                        "label",
-                        null,
-                        "\u9009\u62E9\u91CD\u70B9\u663E\u793AID\uFF1A"
-                    ),
-                    _react2.default.createElement(
-                        "select",
-                        { onChange: this.A_ToolsChange.bind(this) },
-                        this.local.tools.souceId.map(function (da, ind) {
-                            return _react2.default.createElement(
-                                "option",
-                                { key: ind, value: da == "全部" ? -1 : da },
-                                da
-                            );
-                        })
-                    ),
+                    { className: "timeTools", ref: "timeTools" },
                     _react2.default.createElement(
                         "p",
                         null,
                         _react2.default.createElement(
                             "label",
                             null,
+                            "\u9009\u62E9\u91CD\u70B9\u663E\u793AID\uFF1A"
+                        ),
+                        _react2.default.createElement(
+                            "select",
+                            { onChange: this.A_ToolsChange.bind(this) },
+                            this.local.tools.souceId.map(function (da, ind) {
+                                return _react2.default.createElement(
+                                    "option",
+                                    { key: ind, value: da == "全部" ? -1 : da },
+                                    da
+                                );
+                            })
+                        )
+                    ),
+                    _react2.default.createElement(
+                        "p",
+                        null,
+                        _react2.default.createElement(
+                            "label",
+                            { className: "label" },
                             "\u9009\u62E9\u5DE5\u5177\uFF1A"
                         ),
                         _react2.default.createElement(
@@ -10552,10 +10569,10 @@ var VIewIndex = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
                 ),
                 _react2.default.createElement(
                     "article",
-                    { className: "timeLine" },
+                    { className: "timeLine", ref: "timeLine", onScroll: this.A_EventScroll.bind(this), style: { height: screenHeight + "px" } },
                     _react2.default.createElement(
                         "ol",
-                        { className: "timeLineBox", style: { top: h + "px", left: "10px", height: timeLine.length * h + "px", width: "80px" } },
+                        { className: "timeLineBox", style: { top: h + "px", left: "10px", height: _height + "px", width: "80px" } },
                         timeLine.map(function (da, ind) {
 
                             return _react2.default.createElement(
@@ -10567,7 +10584,7 @@ var VIewIndex = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
                     ),
                     _react2.default.createElement(
                         "ul",
-                        { className: "timeLineBlock", style: { left: 80 + 20 + "px", top: "10px", height: timeLine.length * h + "px", width: this.local.blockLi.warpWidth + "px" } },
+                        { className: "timeLineBlock", ref: "timeLineBlock", style: { left: 80 + 20 + "px", top: "10px", height: _height + "px", width: this.local.blockLi.warpWidth + "px" } },
                         this.createTimeLineLi(list)
                     )
                 )
@@ -12520,7 +12537,8 @@ var opt = {
     ele: null, //移动父元素
     x1: 0, y1: 0, //点击title内坐标为止
     left: 0, //父元素距左侧为止
-    index: null
+    index: null,
+    setScroll: null // 滚动
 };
 exports.default = {
     A_EventToutch: function A_EventToutch() {
@@ -12618,6 +12636,28 @@ exports.default = {
             type: "storeIndex",
             data: { showId: value, timeLine: timeLine, list: list }
         });
+    },
+    A_EventScroll: function A_EventScroll(ev) {
+        var _this = this;
+
+        var th = this;
+        var el = this.refs.timeLine;
+        if (!el) {
+            return;
+        }
+        var top = el.scrollTop - 10;
+        if (opt.setScroll) {
+            clearTimeout(opt.setScroll);
+        }
+        this.refs.timeLineBlock.classList.add("hideBox");
+        opt.setScroll = setTimeout(function () {
+            _this.refs.timeLineBlock.classList.remove("hideBox");
+            th.setState({
+                timeLineBlock: {
+                    top: top
+                }
+            });
+        }, 1000);
     }
 };
 
