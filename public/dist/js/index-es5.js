@@ -92,7 +92,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ecf00a9211221e9c2a67"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0e6cbe3a33c227a12083"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -783,7 +783,7 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"2":1,"3":1};
+/******/ 		var cssChunks = {"2":1,"3":1,"4":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
@@ -972,7 +972,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__.e(/* import() */ 2).then(__webpack_require__.t.bind(null, 134, 7));
+__webpack_require__.e(/* import() */ 2).then(__webpack_require__.t.bind(null, 136, 7));
 
 var Index = function (_Component) {
     _inherits(Index, _Component);
@@ -3773,7 +3773,7 @@ var _routerIndex = __webpack_require__(90);
 
 var _routerIndex2 = _interopRequireDefault(_routerIndex);
 
-var _redux = __webpack_require__(129);
+var _redux = __webpack_require__(131);
 
 var _redux2 = _interopRequireDefault(_redux);
 
@@ -10346,7 +10346,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__.e(/* import() */ 3).then(__webpack_require__.t.bind(null, 124, 7));
+__webpack_require__.e(/* import() */ 4).then(__webpack_require__.t.bind(null, 124, 7));
 var mapStateToProps = function mapStateToProps(state) {
 
     return { storeIndex: state.storeIndex };
@@ -10768,8 +10768,15 @@ var serviceIndex = (0, _decoratorIndex2.default)(_class = function serviceIndex(
         var url =  true ? "http://192.168.1.154:5000/FFLv2?getLogList" : undefined;
         // let url = 
         return _this.$axios.get(url).then(_this.success).then(function (da) {
-            var str = "<p>" + da.replace(/\n/ig, "</p><p>");
-            return str.substr(0, str.lastIndexOf("<"));
+            var str = "[{" + da.replace(/\n/ig, "},{");
+            str = str.substr(0, str.lastIndexOf(",{")) + "]";
+            str = str.replace(/[:=]/ig, ":");
+            str = str.replace(/\:([\s\S]*?)\}/ig, ":\"$1\"}");
+            //str = str.replace(/[\:\s]+/ig,",");
+
+            var json = eval(str);
+
+            return json;
         }).catch(function (e) {
             console.log(e);
         });
@@ -12753,6 +12760,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+__webpack_require__.e(/* import() */ 3).then(__webpack_require__.t.bind(null, 129, 7));
+
 var mapStateToProps = function mapStateToProps(state) {
 
     return { storeTabel: state.storeTable };
@@ -12803,24 +12812,63 @@ var ViewTable = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
         key: "render",
         value: function render() {
             var storeTabel = this.props.storeTabel;
-            //if(!storeTabel){ return <div>加载中。。。</div>}
 
-            var text = storeTabel.data.text;
+            if (!storeTabel) {
+                return _react2.default.createElement(
+                    "div",
+                    null,
+                    "\u52A0\u8F7D\u4E2D\u3002\u3002\u3002"
+                );
+            }
+            var list = storeTabel.data.list;
+            // console.log(this.state)
 
-            console.log(this.state);
             if (!this.state.all) {
-                // list = eval(list).slice(-10);
+                list = list.slice(0, 10);
             }
             return _react2.default.createElement(
                 "section",
-                null,
+                { className: "table" },
                 _react2.default.createElement(
-                    "lable",
-                    null,
-                    "\u663E\u793A\u5168\u90E8\uFF1A",
-                    _react2.default.createElement("input", { type: "checkbox", onChange: this.ACheckboxChange.bind(this) })
+                    "div",
+                    { className: "tableHeader" },
+                    _react2.default.createElement(
+                        "lable",
+                        null,
+                        "\u663E\u793A\u5168\u90E8\uFF1A",
+                        _react2.default.createElement("input", { type: "checkbox", onChange: this.ACheckboxChange.bind(this) })
+                    )
                 ),
-                _react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: text } })
+                _react2.default.createElement(
+                    "table",
+                    { className: "tableUl" },
+                    _react2.default.createElement(
+                        "tbody",
+                        null,
+                        list.map(function (da, ind) {
+                            var keys = Object.keys(da)[0],
+                                value = Object.values(da)[0];
+                            value = value.replace(/[\:\s]+/ig, ",").split(",");
+                            console.log(value);
+                            return _react2.default.createElement(
+                                "tr",
+                                { key: ind },
+                                _react2.default.createElement(
+                                    "td",
+                                    { key: ind + "_1" },
+                                    keys
+                                ),
+                                value.map(function (d, i) {
+                                    return _react2.default.createElement(
+                                        "td",
+                                        { key: i },
+                                        d || "null"
+                                    );
+                                })
+                            );
+                        })
+                    )
+                )
             );
         }
     }]);
@@ -12846,19 +12894,21 @@ var service = _interopRequireWildcard(_serviceIndex);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 exports.default = {
     T_getWX: function T_getWX() {
         var th = this;
 
         service.getTestTW().then(function (da) {
             var storeTabel = th.props.storeTabel;
-            var text = storeTabel.data.text;
-            //list=[...list,...da];
+            var list = storeTabel.data.list;
 
+            list = [].concat(_toConsumableArray(da), _toConsumableArray(list));
 
             th.dispatch({
                 type: "storeTable",
-                data: { text: da }
+                data: { list: list }
             });
 
             setTimeout(function () {
@@ -12880,14 +12930,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
     ACheckboxChange: function ACheckboxChange() {
-        // this.setState({
-        //     all:!this.state.all
-        // })
+        this.setState({
+            all: !this.state.all
+        });
     }
 };
 
 /***/ }),
-/* 129 */
+/* 129 */,
+/* 130 */,
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12899,7 +12951,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(30);
 
-var _list = __webpack_require__(130);
+var _list = __webpack_require__(132);
 
 var list = _interopRequireWildcard(_list);
 
@@ -12912,7 +12964,7 @@ var store = (0, _redux.createStore)(reducer);
 exports.default = store;
 
 /***/ }),
-/* 130 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12923,11 +12975,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.storeTable = exports.storeList = exports.storeIndex = undefined;
 
-var _storeIndex = __webpack_require__(131);
+var _storeIndex = __webpack_require__(133);
 
-var _storeList = __webpack_require__(132);
+var _storeList = __webpack_require__(134);
 
-var _storeTable = __webpack_require__(133);
+var _storeTable = __webpack_require__(135);
 
 exports.storeIndex = _storeIndex.storeIndex;
 exports.storeList = _storeList.storeList;
@@ -12935,7 +12987,7 @@ exports.storeTable = _storeTable.storeTable; //let storeIndex = require("./store
 //let storeList = require("./store-list");
 
 /***/ }),
-/* 131 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12967,7 +13019,7 @@ var storeIndex = exports.storeIndex = function storeIndex() {
 };
 
 /***/ }),
-/* 132 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12990,7 +13042,7 @@ var storeList = exports.storeList = function storeList() {
 };
 
 /***/ }),
-/* 133 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
