@@ -3,17 +3,17 @@ export default{
     T_getWX(){
         let th = this;
         
-
+        
         service.getTestTW()
         .then(da=>{
             let {storeTabel} = th.props;
-            let {text} =  storeTabel.data;
-                //list=[...list,...da];
+            let {list} =  storeTabel.data;
+                list=[...da,...list];
 
-                 
+                
            th.dispatch({
              type:"storeTable",
-             data:{ text:da}
+             data:{list}
            })
 
            setTimeout(()=>{

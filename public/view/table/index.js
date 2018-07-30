@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import {mixin} from "@js/tools";
 import controllerTable from "./controller-table";
 import actionTable from "./action-table";
+import ("./css/index.scss");
+
 const mapStateToProps=(state)=>{
 
     return {storeTabel:state.storeTable}
@@ -38,15 +40,27 @@ class ViewTable extends Component{
     }
     render(){
         let {storeTabel} = this.props
-        //if(!storeTabel){ return <div>加载中。。。</div>}
-       let {text} =  storeTabel.data;
-       console.log(this.state)
+        if(!storeTabel){ return <div>加载中。。。</div>}
+       let {list} =  storeTabel.data;
+      // console.log(this.state)
+        
        if(!this.state.all){
-         // list = eval(list).slice(-10);
+          list = list.slice(0,10);
        }
-        return  <section>
-                <lable>显示全部：<input type="checkbox" onChange ={this.ACheckboxChange.bind(this)} /></lable>
-                <div dangerouslySetInnerHTML={{__html:text}}></div>
+        return  <section className="table">
+                <div className="tableHeader"><lable>显示全部：<input type="checkbox" onChange ={this.ACheckboxChange.bind(this)} /></lable></div>
+               <table className="tableUl"><tbody>{
+                   list.map((da,ind)=>{
+                       let keys = Object.keys(da)[0],value=Object.values(da)[0];
+                       value=value.replace(/[\:\s]+/ig,",").split(",");
+                       console.log(value);
+                     return <tr key={ind}><td key={ind+"_1"}>{keys}</td>{
+                         value.map((d,i)=>{
+                             return <td key={i}>{d||"null"}</td>
+                         })
+                     }</tr>
+                   })
+               }</tbody></table>
         </section>
     }
 }

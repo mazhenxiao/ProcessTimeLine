@@ -24,8 +24,15 @@ import Axios from "./decorator-index";
           return this.$axios.get(url)
                     .then(this.success)
                      .then(da=>{
-                         let str = `<p>${da.replace(/\n/ig,"</p><p>")}`;
-                        return str.substr(0,str.lastIndexOf("<"));
+                         let str = `[{${da.replace(/\n/ig,"},{")}`;
+                         str =  str.substr(0,str.lastIndexOf(",{"))+"]";
+                         str = str.replace(/[:=]/ig,`:`);
+                         str = str.replace(/\:([\s\S]*?)\}/ig,`:"$1"}`)
+                         //str = str.replace(/[\:\s]+/ig,",");
+                         
+                         let json = eval(str);
+                         
+                         return json;
                        
                      })
                      .catch(e=>{

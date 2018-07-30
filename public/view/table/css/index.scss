@@ -1,0 +1,20 @@
+$border:rgba(100,100,100,0.1);
+.table{
+    padding:20px;border-collapse:collapse;
+    .tableHeader{ padding:10px 0;}
+    .tableUl{
+       
+        tr{
+            
+
+            td{ 
+                padding:5px;border:$border solid 1px;
+                &:first-child{ width:200px;}                  
+                }
+            
+        
+        }
+        tr:nth-child(odd){ background: rgba(100,100,100,0.1)}
+        
+    }
+}
