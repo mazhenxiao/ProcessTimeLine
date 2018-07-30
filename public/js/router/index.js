@@ -7,7 +7,7 @@ class Prouter extends Component{
     
     render(){
        
-        return <Provider store={store}> 
+        return <Provider store={store} > 
                      <Router>
                         <RouterIndex/>
                     </Router> 

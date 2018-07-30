@@ -5,10 +5,10 @@ import ViewTable from "@view/table";
 
 class RouterIndex extends Component{
     render(){
-       return <div>
+       return <article className="h100 routerBox">
             <Route exact path="/index" component={ViewIndex} />
             <Route exact path="/table" component={ViewTable} />
-        </div>
+        </article>
     }
 }
 export default RouterIndex;

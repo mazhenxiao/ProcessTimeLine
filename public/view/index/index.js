@@ -38,6 +38,11 @@ class VIewIndex extends Component{
                 width:200,//单元格宽
             }
         }
+        this.state={
+            timeLineBlock:{
+                top:0
+            }
+        }
        
     }
     componentDidMount(){
@@ -72,12 +77,14 @@ class VIewIndex extends Component{
        let {width} = this.local.blockLi;
        let color = this.setColor();
        let {showId}=this.props.storeIndex.data;
-       //console.log(showId);
-           for(let li in da){
+       let {top} = this.state.timeLineBlock;
+       let {storeIndex} = this.props
+       let {timeLine=[]}=storeIndex.data;
+          for(let li in da){
                
               //da[li][symbol]=li.toString;
               dom.push(<li key={num} index={num} style={{width:width+"px",left:num*width+"px"}}>
-                  <h6 className="title">{li}</h6>
+                  <h6 className="title" style={{top:top+"px"}}>{li}</h6>
                   <div className="content">
                   {
                      da[li].map((arg,ind)=>{
@@ -85,11 +92,17 @@ class VIewIndex extends Component{
                        //  console.log((end-start));
                          return <span 
                                     key={ind} className="line" 
-                                    style={{opacity:`${showId<0? 1:arg.id==showId? 1:0.1}`,top:start+"px",backgroundColor:`${color[num]}`,height:Math.abs(end-start)+"px",left:(ind*2)+"px"}}
+                                    style={{opacity:`${showId<0? 1:arg.id==showId? 1:0.1}`,top:start+20+"px",backgroundColor:`${color[num]}`,height:Math.abs(end-start)+"px",left:(ind*2)+"px"}}
                                 ><i className="nodeId">{arg.id}</i></span>
                      })
                   }
+                  
                   </div>
+                  {
+                      timeLine.map((da,ind)=>{
+                            return <b className="line" style={{top:h*ind+"px",left:"0px"}} key={ind}></b>
+                        })
+                  }
               </li>);
                num+=1; 
            }
@@ -121,8 +134,11 @@ class VIewIndex extends Component{
         let {height:h,width:w}=this.local.timeLineLi;
         let {width}=this.local.blockLi;
         this.local.blockLi.warpWidth = list.length*this.local.timeLineLi.width;
-        return  <section>
-                   <div className="timeTools">
+        let _height = timeLine.length*h;
+        let screenHeight = window.innerHeight-(this.refs.timeTools? this.refs.timeTools.offsetHeight:80);
+        return  <section className="h100">
+                   <div className="timeTools" ref="timeTools">
+                      <p>
                         <label>选择重点显示ID：</label>
                         <select onChange={this.A_ToolsChange.bind(this)}>
                             {
@@ -131,14 +147,15 @@ class VIewIndex extends Component{
                                 })
                             }
                         </select>
+                        </p>
                         <p>
-                            <label>选择工具：</label>
+                            <label className="label">选择工具：</label>
                             <label>卡尺 <input type="checkbox"  /></label>
                         </p>
                         
                    </div>
-                    <article className="timeLine">
-                    <ol className="timeLineBox" style={{top:h+"px",left:"10px",height:timeLine.length*h+"px",width:"80px"}}>
+                    <article className="timeLine" ref="timeLine" onScroll={this.A_EventScroll.bind(this)} style={{height:screenHeight+"px"}}>
+                    <ol className="timeLineBox" style={{top:h+"px",left:"10px",height:_height+"px",width:"80px"}}>
                         {
                         timeLine.map((da,ind)=>{
                             
@@ -146,9 +163,10 @@ class VIewIndex extends Component{
                         })
                         }
                     </ol>
-                    <ul className="timeLineBlock" style={{left:80+20+"px",top:"10px",height:timeLine.length*h+"px",width:this.local.blockLi.warpWidth+"px"}}>
+                    <ul className="timeLineBlock" ref="timeLineBlock"  style={{left:80+20+"px",top:"10px",height:_height+"px",width:this.local.blockLi.warpWidth+"px"}}>
                             {
                                 this.createTimeLineLi(list)
+                                
                             
                             }
                     </ul>

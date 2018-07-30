@@ -6,7 +6,8 @@ let opt = {
     ele:null,  //移动父元素
     x1:0,y1:0, //点击title内坐标为止
     left:0 ,   //父元素距左侧为止
-    index:null
+    index:null,
+    setScroll:null // 滚动
 }
 export default{
   
@@ -90,6 +91,24 @@ export default{
             type:"storeIndex",
             data:{ showId:value,timeLine,list}
         })
+    },
+    A_EventScroll(ev){
+        let th = this;
+        let el = this.refs.timeLine;
+        if(!el){ return}
+        let top = el.scrollTop-10;
+        if(opt.setScroll){ clearTimeout(opt.setScroll)}
+        this.refs.timeLineBlock.classList.add("hideBox");
+        opt.setScroll = setTimeout(() => {
+            this.refs.timeLineBlock.classList.remove("hideBox");
+            th.setState({
+                timeLineBlock:{
+                    top
+                }
+            })
+        },1000);
+        
+        
     }
 
 
