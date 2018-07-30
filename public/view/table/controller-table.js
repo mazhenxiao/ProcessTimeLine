@@ -7,12 +7,13 @@ export default{
         service.getTestTW()
         .then(da=>{
             let {storeTabel} = th.props;
-            let {list} =  storeTabel.data;
-                list=[...list,...da];
-                
+            let {text} =  storeTabel.data;
+                //list=[...list,...da];
+
+                 
            th.dispatch({
              type:"storeTable",
-             data:{ list}
+             data:{ text:da}
            })
 
            setTimeout(()=>{

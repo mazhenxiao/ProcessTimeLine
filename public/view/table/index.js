@@ -39,20 +39,14 @@ class ViewTable extends Component{
     render(){
         let {storeTabel} = this.props
         //if(!storeTabel){ return <div>加载中。。。</div>}
-       let {list} =  storeTabel.data;
+       let {text} =  storeTabel.data;
        console.log(this.state)
        if(!this.state.all){
-          list = eval(list).slice(-10);
+         // list = eval(list).slice(-10);
        }
         return  <section>
                 <lable>显示全部：<input type="checkbox" onChange ={this.ACheckboxChange.bind(this)} /></lable>
-                <ul>
-                    {
-                       list.map((da,ind)=>{
-                           return <li key={ind}>{da["id"]||"null"}</li>
-                       }) 
-                    }
-                </ul>
+                <div dangerouslySetInnerHTML={{__html:text}}></div>
         </section>
     }
 }
