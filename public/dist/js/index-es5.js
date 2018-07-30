@@ -92,7 +92,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "76d329f13b2237ded783"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ecf00a9211221e9c2a67"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -10727,7 +10727,7 @@ exports.default = {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 exports.getTestTW = exports.getData = undefined;
 
@@ -10742,38 +10742,40 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var serviceIndex = (0, _decoratorIndex2.default)(_class = function serviceIndex() {
-  var _this = this;
+    var _this = this;
 
-  _classCallCheck(this, serviceIndex);
+    _classCallCheck(this, serviceIndex);
 
-  this.getData = function () {
-    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-        _ref$page = _ref.page,
-        page = _ref$page === undefined ? 0 : _ref$page,
-        _ref$count = _ref.count,
-        count = _ref$count === undefined ? 10 : _ref$count;
+    this.getData = function () {
+        var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+            _ref$page = _ref.page,
+            page = _ref$page === undefined ? 0 : _ref$page,
+            _ref$count = _ref.count,
+            count = _ref$count === undefined ? 10 : _ref$count;
 
-    console.log("production");
-    var url =  true ? "http://192.168.1.115:5000/FFLv2?getTrackList" : undefined;
-    //let url = "http://192.168.1.115:5000/FFLv2?getTrackList";
-    //this.$axios.get(url,{params:{page,count}})
-    return _this.$axios.get(url).then(_this.success).then(function (da) {
-      var tarck = da.tarck;
+        // console.log(process.env.NODE_ENV);
+        var url =  true ? "http://192.168.1.115:5000/FFLv2?getTrackList" : undefined;
+        //let url = "http://192.168.1.115:5000/FFLv2?getTrackList";
+        //this.$axios.get(url,{params:{page,count}})
+        return _this.$axios.get(url).then(_this.success).then(function (da) {
+            var tarck = da.tarck;
 
-      return tarck;
-    }).catch(_this.error);
-  };
+            return tarck;
+        }).catch(_this.error);
+    };
 
-  this.getTestTW = function () {
-    var url = "http://192.168.1.154:5000/FFLv2?getLogList";
-    return _this.$axios.get(url).then(_this.success).then(function (da) {
-      return da;
-    }).catch(function (e) {
-      console.log(e);
-    });
-  };
+    this.getTestTW = function () {
+        var url =  true ? "http://192.168.1.154:5000/FFLv2?getLogList" : undefined;
+        // let url = 
+        return _this.$axios.get(url).then(_this.success).then(function (da) {
+            var str = "<p>" + da.replace(/\n/ig, "</p><p>");
+            return str.substr(0, str.lastIndexOf("<"));
+        }).catch(function (e) {
+            console.log(e);
+        });
+    };
 
-  console.log("this=>", this);
+    console.log("this=>", this);
 }) || _class;
 
 var _ref2 = new serviceIndex();
@@ -12803,11 +12805,11 @@ var ViewTable = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
             var storeTabel = this.props.storeTabel;
             //if(!storeTabel){ return <div>加载中。。。</div>}
 
-            var list = storeTabel.data.list;
+            var text = storeTabel.data.text;
 
             console.log(this.state);
             if (!this.state.all) {
-                list = eval(list).slice(-10);
+                // list = eval(list).slice(-10);
             }
             return _react2.default.createElement(
                 "section",
@@ -12818,17 +12820,7 @@ var ViewTable = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
                     "\u663E\u793A\u5168\u90E8\uFF1A",
                     _react2.default.createElement("input", { type: "checkbox", onChange: this.ACheckboxChange.bind(this) })
                 ),
-                _react2.default.createElement(
-                    "ul",
-                    null,
-                    list.map(function (da, ind) {
-                        return _react2.default.createElement(
-                            "li",
-                            { key: ind },
-                            da["id"] || "null"
-                        );
-                    })
-                )
+                _react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: text } })
             );
         }
     }]);
@@ -12854,21 +12846,19 @@ var service = _interopRequireWildcard(_serviceIndex);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 exports.default = {
     T_getWX: function T_getWX() {
         var th = this;
 
         service.getTestTW().then(function (da) {
             var storeTabel = th.props.storeTabel;
-            var list = storeTabel.data.list;
+            var text = storeTabel.data.text;
+            //list=[...list,...da];
 
-            list = [].concat(_toConsumableArray(list), _toConsumableArray(da));
 
             th.dispatch({
                 type: "storeTable",
-                data: { list: list }
+                data: { text: da }
             });
 
             setTimeout(function () {
@@ -12890,9 +12880,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
     ACheckboxChange: function ACheckboxChange() {
-        this.setState({
-            all: !this.state.all
-        });
+        // this.setState({
+        //     all:!this.state.all
+        // })
     }
 };
 
@@ -13013,7 +13003,8 @@ Object.defineProperty(exports, "__esModule", {
 var db = {
     "type": "storeTable",
     "data": {
-        "list": []
+        "list": [],
+        "text": ""
     }
 };
 var storeTable = exports.storeTable = function storeTable() {
