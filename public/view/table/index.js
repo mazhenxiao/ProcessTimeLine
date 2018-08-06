@@ -48,7 +48,9 @@ class ViewTable extends Component{
           list = list.slice(0,10);
        }
         return  <section className="table">
-                <div className="tableHeader"><lable>显示全部：<input type="checkbox" onChange ={this.ACheckboxChange.bind(this)} /></lable></div>
+                <div className="tableHeader">
+                    <lable>显示全部：<input type="checkbox" onChange ={this.ACheckboxChange.bind(this)} /></lable>
+                </div>
                <table className="tableUl"><tbody>{
                    list.map((da,ind)=>{
                        let keys = Object.keys(da)[0],value=Object.values(da)[0];

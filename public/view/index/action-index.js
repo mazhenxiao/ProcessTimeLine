@@ -9,6 +9,7 @@ let opt = {
     index:null,
     setScroll:null // 滚动
 }
+let time=null;
 export default{
   
     A_EventToutch(){
@@ -109,6 +110,16 @@ export default{
         },1000);
         
         
+    },
+    A_Event_Change_Search(ev){
+        clearTimeout(time);
+        time = setTimeout(arg=>{
+            let {storeIndex} = this.props
+            let {list}=storeIndex.data;
+            for(let li in list){
+                let da = list[li]
+            }
+        },2000)
     }
 
 

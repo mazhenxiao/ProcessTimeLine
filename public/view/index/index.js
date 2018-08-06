@@ -152,7 +152,7 @@ class VIewIndex extends Component{
                             <label className="label">选择工具：</label>
                             <label>卡尺 <input type="checkbox"  /></label>
                         </p>
-                        
+                        <p><label className="label">搜索：</label><input type="text" onChange={this.A_Event_Change_Search.bind(this)}  /></p>
                    </div>
                     <article className="timeLine" ref="timeLine" onScroll={this.A_EventScroll.bind(this)} style={{height:screenHeight+"px"}}>
                     <ol className="timeLineBox" style={{top:h+"px",left:"10px",height:_height+"px",width:"80px"}}>
