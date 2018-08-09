@@ -92,7 +92,7 @@
 /******/ 	}
 /******/
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0e6cbe3a33c227a12083"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ee6af5d9a98a61f174ad"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -783,7 +783,7 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"2":1,"3":1,"4":1};
+/******/ 		var cssChunks = {"2":1,"3":1,"4":1,"5":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
@@ -972,7 +972,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__.e(/* import() */ 2).then(__webpack_require__.t.bind(null, 136, 7));
+__webpack_require__.e(/* import() */ 2).then(__webpack_require__.t.bind(null, 139, 7));
 
 var Index = function (_Component) {
     _inherits(Index, _Component);
@@ -3773,7 +3773,7 @@ var _routerIndex = __webpack_require__(90);
 
 var _routerIndex2 = _interopRequireDefault(_routerIndex);
 
-var _redux = __webpack_require__(131);
+var _redux = __webpack_require__(134);
 
 var _redux2 = _interopRequireDefault(_redux);
 
@@ -10269,7 +10269,7 @@ var _index = __webpack_require__(91);
 
 var _index2 = _interopRequireDefault(_index);
 
-var _table = __webpack_require__(126);
+var _table = __webpack_require__(129);
 
 var _table2 = _interopRequireDefault(_table);
 
@@ -10338,6 +10338,10 @@ var _reactRedux = __webpack_require__(16);
 
 var _tools = __webpack_require__(123);
 
+var _dialog = __webpack_require__(124);
+
+var _dialog2 = _interopRequireDefault(_dialog);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10346,7 +10350,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__.e(/* import() */ 4).then(__webpack_require__.t.bind(null, 124, 7));
+__webpack_require__.e(/* import() */ 4).then(__webpack_require__.t.bind(null, 127, 7));
 var mapStateToProps = function mapStateToProps(state) {
 
     return { storeIndex: state.storeIndex };
@@ -10419,6 +10423,7 @@ var VIewIndex = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
                                 "span",
                                 {
                                     key: ind, className: "line",
+                                    onClick: _this.A_Event_Click_Span.bind(_this, arg),
                                     style: { opacity: "" + (showId < 0 ? 1 : arg.id == showId ? 1 : 0.1), top: start + 20 + "px", backgroundColor: "" + color[num], height: Math.abs(end - start) + "px", left: ind * 2 + "px" }
                                 },
                                 _react2.default.createElement(
@@ -10477,6 +10482,11 @@ var VIewIndex = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
         _this.state = {
             timeLineBlock: {
                 top: 0
+            },
+            dialog: {
+                content: "",
+                title: "",
+                show: false
             }
         };
 
@@ -10565,6 +10575,16 @@ var VIewIndex = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
                             "\u5361\u5C3A ",
                             _react2.default.createElement("input", { type: "checkbox" })
                         )
+                    ),
+                    _react2.default.createElement(
+                        "p",
+                        null,
+                        _react2.default.createElement(
+                            "label",
+                            { className: "label" },
+                            "\u641C\u7D22\uFF1A"
+                        ),
+                        _react2.default.createElement("input", { type: "text", onChange: this.A_Event_Change_Search.bind(this) })
                     )
                 ),
                 _react2.default.createElement(
@@ -10587,7 +10607,8 @@ var VIewIndex = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
                         { className: "timeLineBlock", ref: "timeLineBlock", style: { left: 80 + 20 + "px", top: "10px", height: _height + "px", width: this.local.blockLi.warpWidth + "px" } },
                         this.createTimeLineLi(list)
                     )
-                )
+                ),
+                _react2.default.createElement(_dialog2.default, { title: "\u63D0\u793A", content: this.state.content, show: this.state.show })
             );
         }
     }]);
@@ -12538,6 +12559,9 @@ module.exports = function spread(callback) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var opt = {
     startx: 0,
     starty: 0,
@@ -12549,6 +12573,7 @@ var opt = {
     index: null,
     setScroll: null // 滚动
 };
+var time = null;
 exports.default = {
     A_EventToutch: function A_EventToutch() {
 
@@ -12667,6 +12692,25 @@ exports.default = {
                 }
             });
         }, 1000);
+    },
+    A_Event_Change_Search: function A_Event_Change_Search(ev) {
+        var _this2 = this;
+
+        clearTimeout(time);
+        time = setTimeout(function (arg) {
+            var storeIndex = _this2.props.storeIndex;
+            var list = storeIndex.data.list;
+
+            for (var li in list) {
+                var da = list[li];
+            }
+        }, 2000);
+    },
+    A_Event_Click_Span: function A_Event_Click_Span(da, ev) {
+        var dialog = this.state.dialog;
+
+
+        this.setState(_extends({}, dialog, { content: JSON.stringify(da), show: true }));
     }
 };
 
@@ -12720,9 +12764,108 @@ Object.defineProperty(Object.prototype, "length", {
 });
 
 /***/ }),
-/* 124 */,
+/* 124 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+__webpack_require__.e(/* import() */ 5).then(__webpack_require__.t.bind(null, 125, 7));
+
+var Dialog = function (_Component) {
+    _inherits(Dialog, _Component);
+
+    function Dialog(arg) {
+        _classCallCheck(this, Dialog);
+
+        //console.log(this.props);
+        var _this = _possibleConstructorReturn(this, (Dialog.__proto__ || Object.getPrototypeOf(Dialog)).call(this, arg));
+
+        var local = {
+            title: "名称",
+            content: "",
+            show: false
+        };
+        _this.state = _extends({}, local, _this.props);
+        return _this;
+    }
+
+    _createClass(Dialog, [{
+        key: "componentWillMount",
+        value: function componentWillMount() {}
+    }, {
+        key: "componentDidMount",
+        value: function componentDidMount() {}
+    }, {
+        key: "componentWillReceiveProps",
+        value: function componentWillReceiveProps(state) {
+            this.setState(state);
+        }
+    }, {
+        key: "close",
+        value: function close() {
+
+            this.setState({ show: false });
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            var data = this.state;
+            // debugger
+
+            return _react2.default.createElement(
+                "article",
+                { className: data.show ? "dialog show" : "dialog" },
+                _react2.default.createElement(
+                    "h4",
+                    null,
+                    data.title,
+                    _react2.default.createElement(
+                        "span",
+                        { onClick: this.props.close ? this.props.close.bind(this, data) : this.close.bind(this) },
+                        "X"
+                    )
+                ),
+                _react2.default.createElement(
+                    "section",
+                    null,
+                    data.content
+                )
+            );
+        }
+    }]);
+
+    return Dialog;
+}(_react.Component);
+
+exports.default = Dialog;
+
+/***/ }),
 /* 125 */,
-/* 126 */
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12744,11 +12887,11 @@ var _reactRedux = __webpack_require__(16);
 
 var _tools = __webpack_require__(123);
 
-var _controllerTable = __webpack_require__(127);
+var _controllerTable = __webpack_require__(130);
 
 var _controllerTable2 = _interopRequireDefault(_controllerTable);
 
-var _actionTable = __webpack_require__(128);
+var _actionTable = __webpack_require__(131);
 
 var _actionTable2 = _interopRequireDefault(_actionTable);
 
@@ -12760,7 +12903,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-__webpack_require__.e(/* import() */ 3).then(__webpack_require__.t.bind(null, 129, 7));
+__webpack_require__.e(/* import() */ 3).then(__webpack_require__.t.bind(null, 132, 7));
 
 var mapStateToProps = function mapStateToProps(state) {
 
@@ -12878,7 +13021,7 @@ var ViewTable = (_dec = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToP
 exports.default = ViewTable;
 
 /***/ }),
-/* 127 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12919,7 +13062,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 128 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12937,9 +13080,9 @@ exports.default = {
 };
 
 /***/ }),
-/* 129 */,
-/* 130 */,
-/* 131 */
+/* 132 */,
+/* 133 */,
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12951,7 +13094,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(30);
 
-var _list = __webpack_require__(132);
+var _list = __webpack_require__(135);
 
 var list = _interopRequireWildcard(_list);
 
@@ -12964,7 +13107,7 @@ var store = (0, _redux.createStore)(reducer);
 exports.default = store;
 
 /***/ }),
-/* 132 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12975,11 +13118,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.storeTable = exports.storeList = exports.storeIndex = undefined;
 
-var _storeIndex = __webpack_require__(133);
+var _storeIndex = __webpack_require__(136);
 
-var _storeList = __webpack_require__(134);
+var _storeList = __webpack_require__(137);
 
-var _storeTable = __webpack_require__(135);
+var _storeTable = __webpack_require__(138);
 
 exports.storeIndex = _storeIndex.storeIndex;
 exports.storeList = _storeList.storeList;
@@ -12987,7 +13130,7 @@ exports.storeTable = _storeTable.storeTable; //let storeIndex = require("./store
 //let storeList = require("./store-list");
 
 /***/ }),
-/* 133 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13019,7 +13162,7 @@ var storeIndex = exports.storeIndex = function storeIndex() {
 };
 
 /***/ }),
-/* 134 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13042,7 +13185,7 @@ var storeList = exports.storeList = function storeList() {
 };
 
 /***/ }),
-/* 135 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

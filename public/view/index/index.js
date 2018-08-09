@@ -3,7 +3,7 @@ import controllerIndex from "./controller-index";
 import actionIndex from "./action-index";
 import {connect} from "react-redux";
 import {mixin,time} from "@js/tools";
-
+import Dialog from "@js/tools/dialog";
 import ("@view/index/css/index.scss");
  const mapStateToProps=(state)=>{
     
@@ -41,6 +41,11 @@ class VIewIndex extends Component{
         this.state={
             timeLineBlock:{
                 top:0
+            },
+            dialog:{
+                content:"",
+                title:"",
+                show:false
             }
         }
        
@@ -92,6 +97,7 @@ class VIewIndex extends Component{
                        //  console.log((end-start));
                          return <span 
                                     key={ind} className="line" 
+                                    onClick={this.A_Event_Click_Span.bind(this,arg)}
                                     style={{opacity:`${showId<0? 1:arg.id==showId? 1:0.1}`,top:start+20+"px",backgroundColor:`${color[num]}`,height:Math.abs(end-start)+"px",left:(ind*2)+"px"}}
                                 ><i className="nodeId">{arg.id}</i></span>
                      })
@@ -172,6 +178,7 @@ class VIewIndex extends Component{
                     </ul>
                     
                 </article>
+                <Dialog title="提示" content={this.state.content} show={this.state.show} />
         </section>
     }
 }

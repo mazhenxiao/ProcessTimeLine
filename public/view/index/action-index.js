@@ -120,6 +120,11 @@ export default{
                 let da = list[li]
             }
         },2000)
+    },
+    A_Event_Click_Span(da,ev){
+        let {dialog} = this.state;
+
+        this.setState({...dialog,content:JSON.stringify(da),show:true});
     }
 
 
