@@ -46,6 +46,7 @@ export default{
         //console.log(opt.x);
     },
     Private_Mouseup(event,th){
+        if(!opt["ele"]){return}
         opt.start=false;
         let left = this.Private_checkPostion();
         //Object.assign(opt.ele,{left:left+"px",zIndex:1})
@@ -102,6 +103,8 @@ export default{
         this.refs.timeLineBlock.classList.add("hideBox");
         opt.setScroll = setTimeout(() => {
             this.refs.timeLineBlock.classList.remove("hideBox");
+       
+            
             th.setState({
                 timeLineBlock:{
                     top
@@ -125,6 +128,9 @@ export default{
         let {dialog} = this.state;
 
         this.setState({...dialog,content:JSON.stringify(da),show:true});
+    },
+    A_Event_CallbackClose(da){
+        this.setState({show:false})
     }
 
 

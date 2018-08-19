@@ -178,7 +178,7 @@ class VIewIndex extends Component{
                     </ul>
                     
                 </article>
-                <Dialog title="提示" content={this.state.content} show={this.state.show} />
+                <Dialog title="提示" content={this.state.content} close={this.A_Event_CallbackClose.bind(this)} show={this.state.show} />
         </section>
     }
 }

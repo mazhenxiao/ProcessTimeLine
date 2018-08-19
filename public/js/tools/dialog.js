@@ -15,7 +15,7 @@ class Dialog extends Component{
        
     }
     componentDidMount(){
-
+       
     }
     componentWillReceiveProps(state){
         this.setState(state);
