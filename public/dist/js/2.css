@@ -20,3 +20,6 @@ html, body, .h100 {
   -ms-user-select: none;
   user-select: none; }
 
+.inlineBlock {
+  display: inline-block; }
+
