@@ -11,7 +11,6 @@ const mapDispatchToProps=(dispatch)=>{
 }
 //@connect(mapStateToProps,mapDispatchToProps)
 export default myconnect=(target,name,discription)=>{
-    debugger
      return target;
 }
 //@connect(mapStateToProps,mapDispatchToProps)

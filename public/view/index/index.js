@@ -4,6 +4,8 @@ import actionIndex from "./action-index";
 import {connect} from "react-redux";
 import {mixin,time} from "@js/tools";
 import Dialog from "@js/tools/dialog";
+import SlideDialog from "@js/tools/slideDialog";
+import AutoComplete from "@js/tools/autoComplete.js";
 import ("@view/index/css/index.scss");
  const mapStateToProps=(state)=>{
     
@@ -46,7 +48,8 @@ class VIewIndex extends Component{
                 content:"",
                 title:"",
                 show:false
-            }
+            },
+            SlideDialog:[]
         }
        
     }
@@ -141,7 +144,7 @@ class VIewIndex extends Component{
         let {width}=this.local.blockLi;
         this.local.blockLi.warpWidth = list.length*this.local.timeLineLi.width;
         let _height = timeLine.length*h;
-        let screenHeight = window.innerHeight-(this.refs.timeTools? this.refs.timeTools.offsetHeight:80);
+        let screenHeight = window.innerHeight-(this.refs.timeTools? this.refs.timeTools.offsetHeight:80)-50;
         return  <section className="h100">
                    <div className="timeTools" ref="timeTools">
                       <p>
@@ -159,6 +162,7 @@ class VIewIndex extends Component{
                             <label>卡尺 <input type="checkbox"  /></label>
                         </p>
                         <p><label className="label">搜索：</label><input type="text" onChange={this.A_Event_Change_Search.bind(this)}  /></p>
+                     
                    </div>
                     <article className="timeLine" ref="timeLine" onScroll={this.A_EventScroll.bind(this)} style={{height:screenHeight+"px"}}>
                     <ol className="timeLineBox" style={{top:h+"px",left:"10px",height:_height+"px",width:"80px"}}>
@@ -178,7 +182,12 @@ class VIewIndex extends Component{
                     </ul>
                     
                 </article>
-                <Dialog title="提示" content={this.state.content} close={this.A_Event_CallbackClose.bind(this)} show={this.state.show} />
+                <SlideDialog title="查询" top="50"  data={this.state.SlideDialog} />
+                <Dialog 
+                    title="提示" 
+                    content={this.state.content} 
+                    close={this.A_Event_CallbackClose.bind(this)} 
+                    show={this.state.show} />
         </section>
     }
 }

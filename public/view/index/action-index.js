@@ -103,26 +103,28 @@ export default{
         this.refs.timeLineBlock.classList.add("hideBox");
         opt.setScroll = setTimeout(() => {
             this.refs.timeLineBlock.classList.remove("hideBox");
-       
-            
             th.setState({
                 timeLineBlock:{
                     top
                 }
             })
         },1000);
-        
-        
     },
     A_Event_Change_Search(ev){
+        let val = ev.target.value;
         clearTimeout(time);
         time = setTimeout(arg=>{
             let {storeIndex} = this.props
             let {list}=storeIndex.data;
+           
+            let db= [];
             for(let li in list){
                 let da = list[li]
+                db = [...db,...da.filter(v=>v.id==val)]
             }
-        },2000)
+            console.log(db);
+            this.setState({"SlideDialog":db});
+        },500)
     },
     A_Event_Click_Span(da,ev){
         let {dialog} = this.state;
